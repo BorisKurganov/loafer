@@ -1,0 +1,45 @@
+<body>
+    {% extends "base.html" %}
+    
+    {% block content %}
+    <center><h1>Безделометр</h1></center>
+    <br>
+        <div class="alert alert-success" role="alert">Прокрастинируете?</div>
+        <h3 class="alert alert-success" role="alert" id="counter-label" method="post">{{ counter }}</h3>
+       
+        <br>
+        <div class="text-center">
+            <button onclick="incrementClick()" class="btn btn-success">+ 1</button>
+            
+            <button onclick="getCounter()" class="btn btn-warning" >Сохранить</button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ url_for('index') }}">На главную</a>
+        </div>
+        
+        <script>
+            var counterVal = "{{ counter }}";
+
+            function incrementClick() {
+                updateDisplay(++counterVal);
+            }
+
+            function resetCounter() {
+                counterVal = 0;
+                updateDisplay(counterVal);
+            }
+
+            function updateDisplay(val) {
+                document.getElementById("counter-label").innerHTML = val;
+            }
+            
+            function getCounter() {
+                var counter = document.getElementById("counter-label").value;
+                $.post(counterVal)
+            }
+        </script>
+    {% endblock %}
+</body>

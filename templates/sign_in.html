@@ -1,0 +1,46 @@
+<body>
+    {% extends "base.html" %}
+    
+    {% block content %}
+    <div class="container">
+
+        <form action="{{ adr }}" method="post" class="text-center">
+            <h2 class="form-signin-heading">Вход/Регистрация</h2>
+
+            {{ form.csrf_token }}
+            {% for field in form if field.name not in ('csrf_token', 'submit', 'remember_me') %}
+                <p>
+                {{ field.label }}</p>
+                <p>
+                {{ field(class="form-control") }}
+                {% for eror in field.errors %}
+                    {{ error}}
+                {% endfor %}
+               </p>
+        {% endfor %}
+        <br>
+        <div class="container">
+            {{ form.remember_me(class="orm-control") }}
+            {{ form.remember_me.label(class="text-left") }}
+        </div>
+        <br>
+        {{ form.submit(class="btn btn-primary") }}
+        <br>
+        <br>
+        <a class="btn btn-primary" href="{{ url_for('lets_play') }}">Баздельничать дальше</a>
+        <br>
+        <br>
+        <br>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <h3>{{ message }}</h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}        
+      </form>
+
+    </div> <!-- /container -->
+
+    {% endblock %}
+</body>

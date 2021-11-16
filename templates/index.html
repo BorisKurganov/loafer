@@ -1,0 +1,27 @@
+<body>
+    {% extends "base.html" %}
+    
+    {% block content %}
+    <center><h1>Безделометр</h1></center>
+    <br>
+    <br>
+        <div class="text-center">
+            <a class="btn btn-primary" href="{{ url_for('lets_play') }}">Баздельничать</a>
+            <a class="btn btn-success" href="{{ url_for('sign_in') }}">Войти</a>
+            <a class="btn btn-success" href="{{ url_for('registration') }}">Зарегистрироваться</a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a class="btn btn-success" href="{{ url_for('score_board') }}">Смотреть доску почёта</a>
+        </div>
+        <br>
+        {% if 'user_name' in session %}
+            <div class="text-center">
+                <h3> Вы вошли как {{ session['user_name'] }}</h3>
+                <a class="btn btn-warning" href="{{ url_for('logout') }}">Выйти</a>
+            </div>
+        {% endif %}
+    {% endblock %}
+</body>
+
+
