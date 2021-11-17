@@ -21,10 +21,15 @@ def get_score(user_id):
 
 def write_in_base(name, email, password, score):
     """Делает запись в базу данных"""
-    user_data = (name, email, password, score)
-    sql_request("""INSERT INTO users
-                   (name, email, password, scores) 
-                    values (?, ?, ?, ?)""", user_data)
+    if sql_request("""SELECT email
+                          FROM users
+                          WHERE email = :index""", {"index": email}):
+        return "Пользователь с такой почтой уже зарегистрирован"
+    else:
+        user_data = (name, email, password, score)
+        sql_request("""INSERT INTO users
+                      (name, email, password, scores) 
+                       values (?, ?, ?, ?)""", user_data)
 
 def get_user(name, email, password):
     """Извлекает из базы данные о пользователе"""
@@ -42,3 +47,6 @@ def get_top():
     return sql_request("""SELECT name, scores
                           FROM users
                           ORDER BY scores DESC LIMIT 10""")
+
+if __name__ == "__main__":
+    print(write_in_base('test', 'test@tes.ru', '123', '12'))

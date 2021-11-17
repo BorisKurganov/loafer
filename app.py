@@ -40,8 +40,11 @@ def registration():
         else:
             session.permanent = False
 
-        #записываем пользователя в базу
-        bf.write_in_base(name, email, password, 0)
+        #записываем пользователя в базу если его почту ещё не регистрировались
+        if bf.write_in_base(name, email, password, 0):
+            flash("Пользователь с такой почтой уже зарегистрирован!")
+            return redirect(url_for('registration'))
+
         #записываем пользователя в сессию, чтобы после регистрации он остался залогиненым
         session['user_name'] = name
         session['user_scores'] = 0
