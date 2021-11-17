@@ -42,9 +42,3 @@ def get_top():
     return sql_request("""SELECT name, scores
                           FROM users
                           ORDER BY scores DESC LIMIT 10""")
-
-if __name__ == '__main__':
-    #update_score('test', 'test@test.ru', '123', 2)
-    #print(get_score(1))
-    #print(get_user('test', 'test@test.ru', '123'))
-    print(get_top())
