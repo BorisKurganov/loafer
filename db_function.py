@@ -39,9 +39,9 @@ def update_score(scores, user_id):
 
 def get_top():
     """Возвращаёт топ 10 из базы"""
-    return list(reversed(sql_request("""SELECT name, scores
+    return sql_request("""SELECT name, scores
                           FROM users
-                          ORDER BY scores LIMIT 10""")))
+                          ORDER BY scores DESC LIMIT 10""")
 
 if __name__ == '__main__':
     #update_score('test', 'test@test.ru', '123', 2)
