@@ -47,6 +47,3 @@ def get_top():
     return sql_request("""SELECT name, scores
                           FROM users
                           ORDER BY scores DESC LIMIT 10""")
-
-if __name__ == "__main__":
-    print(write_in_base('test', 'test@tes.ru', '123', '12'))
